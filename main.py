@@ -3,12 +3,8 @@ import streamlit as st
 import plotly.express as px
 import plotly.io as pio
 
-PATH = "/Users/andresgarcia/Documents/projects/kaggle/"
+PATH = "/Users/andresgarcia/Documents/work/covid/additional_aggregates/"
 
-# Country Daily Data
-df = pd.read_csv(PATH + "input/agg_country_2021_02_26.csv", index_col="GID_0", parse_dates=True)
-df = df.drop(['ISO_3', 'NAME_0', 'country_agg'], axis=1).fillna(0)
-df2 = df.filter(regex='pct')
 
 def get_data(type, date):
     if type == "Country Daily":
@@ -38,7 +34,7 @@ def get_data(type, date):
 
 def data_hists(data):
     for col in data.columns:
-        fig = px.histogram(df2, x=col)
+        fig = px.histogram(data, x=col)
         st.plotly_chart(fig, use_container_width=True)
 
 
